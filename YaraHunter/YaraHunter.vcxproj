@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClCompile Include="agent.c" />
     <ClCompile Include="list.c" />
+    <ClCompile Include="rc4.c" />
     <ClCompile Include="utils.c" />
     <ClCompile Include="YaraHunter.c" />
     <ClCompile Include="yara_engine.c" />
@@ -161,6 +162,7 @@
   <ItemGroup>
     <ClInclude Include="agent.h" />
     <ClInclude Include="list.h" />
+    <ClInclude Include="rc4.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="YaraHunter.h" />

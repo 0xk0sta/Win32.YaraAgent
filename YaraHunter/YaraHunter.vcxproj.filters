@@ -29,6 +29,9 @@
     <ClCompile Include="agent.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rc4.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="list.h">
@@ -47,6 +50,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rc4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

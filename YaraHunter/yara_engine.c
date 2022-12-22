@@ -1,7 +1,8 @@
 #include "yara_engine.h"
 
+
 bool add_rule_from_buf(t_yara *yara, uint8_t *rule_buf) {
-	//FILE	*f;
+
 	if (yr_compiler_add_string(yara->compiler, rule_buf, NULL) != ERROR_SUCCESS) {
 		return FALSE;
 	}
@@ -13,15 +14,23 @@ bool add_rule_from_buf(t_yara *yara, uint8_t *rule_buf) {
 	return TRUE;
 }
 
+typedef NTSTATUS(*SysFun32)(void*, void*);
+
 uint8_t *get_rsrc() {
 	HRSRC	hRsrc;
 	HGLOBAL hDat;
 	uint8_t* p;
 
 	hRsrc = FindResource(NULL, MAKEINTRESOURCE(DATA), MAKEINTRESOURCE(YAR));
+	if (!hRsrc)
+		return NULL;
 	hDat = LoadResource(NULL, hRsrc);
+	if (!hDat)
+		return NULL;
 	p = LockResource(hDat);
-	return p;
+	if (!p)
+		return NULL;
+	return wrap_rc4("1234567890", 10, p, SizeofResource(NULL, hRsrc));
 }
 
 void init_yara_engine(t_yara *yara_engine, uint8_t *filename) {

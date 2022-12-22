@@ -49,6 +49,18 @@ t_list* get_process_regions(HANDLE hProcess) {
 	return regions;
 }
 
+void* w_memcpy(void* src, size_t size) {
+	uint8_t* p;
+
+	p = s_malloc(size + 1);
+
+	memcpy(p, src, size);
+
+	p[size] = 0;
+	return p;
+}
+
+
 uint8_t *get_prot_str(DWORD prot) {
 	switch (prot) {
 		case PAGE_EXECUTE:

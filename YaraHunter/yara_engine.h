@@ -10,6 +10,7 @@
 #include <winbase.h>
 #include "utils.h"
 #include "resource.h"
+#include "rc4.h"
 
 typedef struct s_yara {
 	YR_COMPILER *compiler;

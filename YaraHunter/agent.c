@@ -5,6 +5,7 @@ uint8_t	filename[] = "..\\YaraHunter\\xor.yar";
 ///
 
 // Proc scanner with callback!
+// Todo: Thread scanner!
 
 void proc_scanner(void (*callback)(HANDLE, t_udata*, void*), void* udata1) {
 	t_udata			udata;
@@ -100,10 +101,6 @@ void cb_proc_scan(HANDLE hProc, t_udata *udata, void *yara_engine) {
 
 void	deploy_agent() {
 	t_yara			yara_engine;
-
-	///
-
-	///
 	
 	init_yara_engine(&yara_engine, filename);
 	proc_scanner(cb_proc_scan, (void*)&yara_engine);
