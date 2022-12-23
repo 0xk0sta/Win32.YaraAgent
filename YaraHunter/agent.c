@@ -60,20 +60,19 @@ int agent_callback(YR_SCAN_CONTEXT *context, int message, void *message_data, vo
 void scan_region(HANDLE hProc, t_region_info *region, t_yara *yara_engine, t_udata *udata) {
 	uint8_t			*buffer;
 	size_t			b_read;
-
+	
+	if (region->size > HUNDREDMB ) {
+		printf("[Â·]\tWarning: The region is too big: %lu \n", region->size);
+		return;
+	}
 	b_read = 0;
 	buffer = s_malloc(sizeof(uint8_t) * (region->size + 1));
 	buffer[region->size] = 0;
 	udata->base = region->base;
 	if (ReadProcessMemory(hProc, region->base, buffer, region->size, &b_read) 
 		&& b_read > 0) {
-		if (b_read > HUNDREDMB) {
-			printf("[·]\tWarning: The region is too big: %lu \n", b_read);
-			return;
-		}
-		else {
-			yr_rules_scan_mem(yara_engine->rules, buffer, region->size, SCAN_FLAGS_PROCESS_MEMORY, agent_callback, udata, 0);
-		}
+			yr_rules_scan_mem(yara_engine->rules, buffer, region->size,
+					  SCAN_FLAGS_PROCESS_MEMORY, agent_callback, udata, 0);
 	}
 	free(buffer);
 }
